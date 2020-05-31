@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E266" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BuyCategory" representedClassName=".BuyCategory" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="buyItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BuyItem" inverseName="parentCategory" inverseEntity="BuyItem"/>
+    </entity>
+    <entity name="BuyItem" representedClassName=".BuyItem" syncable="YES" codeGenerationType="class">
+        <attribute name="done" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BuyCategory" inverseName="buyItems" inverseEntity="BuyCategory"/>
+    </entity>
+    <entity name="Category" representedClassName=".Category" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="parentCategory" inverseEntity="Item"/>
+    </entity>
+    <entity name="Item" representedClassName=".Item" syncable="YES" codeGenerationType="class">
+        <attribute name="done" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="items" inverseEntity="Category"/>
+    </entity>
+    <elements>
+        <element name="BuyCategory" positionX="-252.6796875" positionY="182.21875" width="128" height="73"/>
+        <element name="BuyItem" positionX="-63.60546875" positionY="187.15234375" width="128" height="88"/>
+        <element name="Category" positionX="-266.30078125" positionY="-7.5" width="128" height="73"/>
+        <element name="Item" positionX="-63" positionY="-18" width="128" height="88"/>
+    </elements>
+</model>
