@@ -6,6 +6,7 @@
     </entity>
     <entity name="BuyItem" representedClassName=".BuyItem" syncable="YES" codeGenerationType="class">
         <attribute name="done" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="orderPosition" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BuyCategory" inverseName="buyItems" inverseEntity="BuyCategory"/>
     </entity>
@@ -20,7 +21,7 @@
     </entity>
     <elements>
         <element name="BuyCategory" positionX="-252.6796875" positionY="182.21875" width="128" height="73"/>
-        <element name="BuyItem" positionX="-63.60546875" positionY="187.15234375" width="128" height="88"/>
+        <element name="BuyItem" positionX="-63.60546875" positionY="187.15234375" width="128" height="103"/>
         <element name="Category" positionX="-266.30078125" positionY="-7.5" width="128" height="73"/>
         <element name="Item" positionX="-63" positionY="-18" width="128" height="88"/>
     </elements>

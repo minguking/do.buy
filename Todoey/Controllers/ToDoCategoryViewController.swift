@@ -7,12 +7,13 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class ToDoCategoryViewController: UIViewController {
     
-    var categories = [Category]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let realm = try! Realm()
+    
+    var categories: Results<Category>?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -36,11 +37,10 @@ class ToDoCategoryViewController: UIViewController {
             
             if textField.text != "" {
                 
-                let newCategory = Category(context: self.context)
-                newCategory.name = textField.text
+                let newCategory = Category()
+                newCategory.name = textField.text!
                 
-                self.categories.append(newCategory)
-                self.saveCategories()
+                self.save(category: newCategory)
             }
         }
         
@@ -53,9 +53,11 @@ class ToDoCategoryViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func saveCategories() {
+    func save(category: Category) {
         do {
-            try context.save()
+            try realm.write {
+                realm.add(category)
+            }
         } catch {
             print(error.localizedDescription)
         }
@@ -63,12 +65,9 @@ class ToDoCategoryViewController: UIViewController {
     }
     
     func loadCategories() {
-        let request: NSFetchRequest<Category> = Category.fetchRequest()
-        do {
-            categories = try context.fetch(request)
-        } catch {
-            print(error.localizedDescription)
-        }
+        
+        categories = realm.objects(Category.self)
+        
         self.tableView.reloadData()
     }
 }
@@ -76,13 +75,14 @@ class ToDoCategoryViewController: UIViewController {
 extension ToDoCategoryViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return categories?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         
-        cell.textLabel?.text = categories[indexPath.row].name
+        cell.textLabel?.text = categories?[indexPath.row].name ?? "No Category added yet"
         
         return cell
     }
@@ -91,7 +91,7 @@ extension ToDoCategoryViewController: UITableViewDataSource, UITableViewDelegate
         let destinationVC = segue.destination as! ToDoViewController
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedCategory = categories[indexPath.row]
+            destinationVC.selectedCategory = categories?[indexPath.row]
         }
     }
     
@@ -100,13 +100,13 @@ extension ToDoCategoryViewController: UITableViewDataSource, UITableViewDelegate
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            context.delete(categories[indexPath.row])
-            categories.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            context.delete(categories[indexPath.row])
+//            categories.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        }
+//    }
     
     
     

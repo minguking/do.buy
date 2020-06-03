@@ -7,13 +7,15 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class ToBuyCategoryViewController: UIViewController {
     
+    let realm = try! Realm()
+    
     var categories = [BuyCategory]()
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -23,7 +25,7 @@ class ToBuyCategoryViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        loadCategories()
+//        loadCategories()
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
@@ -36,11 +38,11 @@ class ToBuyCategoryViewController: UIViewController {
             
             if textField.text != "" {
                 
-                let newCategory = BuyCategory(context: self.context)
-                newCategory.name = textField.text
+                let newCategory = BuyCategory()
+                newCategory.name = textField.text!
                 
                 self.categories.append(newCategory)
-                self.saveCategories()
+//                self.saveCategories()
             }
             
         }
@@ -53,24 +55,24 @@ class ToBuyCategoryViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func saveCategories() {
-        do {
-            try context.save()
-        } catch {
-            print(error.localizedDescription)
-        }
-        self.tableView.reloadData()
-    }
+//    func saveCategories() {
+//        do {
+//            try context.save()
+//        } catch {
+//            print(error.localizedDescription)
+//        }
+//        self.tableView.reloadData()
+//    }
     
-    func loadCategories() {
-        let request: NSFetchRequest<BuyCategory> = BuyCategory.fetchRequest()
-        do {
-            categories = try context.fetch(request)
-        } catch {
-            print(error.localizedDescription)
-        }
-        self.tableView.reloadData()
-    }
+//    func loadCategories() {
+//        let request: NSFetchRequest<BuyCategory> = BuyCategory.fetchRequest()
+//        do {
+//            categories = try context.fetch(request)
+//        } catch {
+//            print(error.localizedDescription)
+//        }
+//        self.tableView.reloadData()
+//    }
     
 }
 
@@ -89,6 +91,7 @@ extension ToBuyCategoryViewController: UITableViewDataSource, UITableViewDelegat
         return cell
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as! ToBuyViewController
         
@@ -103,14 +106,14 @@ extension ToBuyCategoryViewController: UITableViewDataSource, UITableViewDelegat
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            context.delete(categories[indexPath.row])
-            categories.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//
+//        if editingStyle == .delete {
+//            context.delete(categories[indexPath.row])
+//            categories.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        }
+//    }
     
     
     
