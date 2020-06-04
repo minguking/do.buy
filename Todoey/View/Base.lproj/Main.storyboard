@@ -15,13 +15,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="to0-Wt-RPB">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="to0-Wt-RPB">
+                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="D7N-tH-1SO">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoItemCell" id="Xk9-gi-Xce">
@@ -46,14 +46,23 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Todo" image="checkmark.shield" catalog="system" id="VxB-fq-k9b"/>
                     <navigationItem key="navigationItem" title="To do" id="ak1-XO-kgx">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="89K-2e-RF9">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="addButtonTapped:" destination="BYZ-38-t0r" id="97V-Ct-66v"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="89K-2e-RF9">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="BYZ-38-t0r" id="97V-Ct-66v"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="⇅" id="7hL-4n-6cI">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="editButtonTapped:" destination="BYZ-38-t0r" id="fPM-Nh-LR4"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="7hL-4n-6cI" id="LSq-wq-N1N"/>
                         <outlet property="searchBar" destination="D7N-tH-1SO" id="0kX-zH-3LS"/>
                         <outlet property="tableView" destination="to0-Wt-RPB" id="vww-UZ-24Z"/>
                     </connections>
@@ -70,17 +79,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p7t-4S-b1U">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p7t-4S-b1U">
+                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <gestureRecognizers/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="757-Nc-iHt">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="toBuyItemCell" id="bDV-5I-Qvt">
-                                        <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="84" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bDV-5I-Qvt" id="jEO-qR-IYD">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -91,6 +101,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="0Dl-qw-zYj" firstAttribute="trailing" secondItem="p7t-4S-b1U" secondAttribute="trailing" id="0RK-ie-LE5"/>
                             <constraint firstItem="p7t-4S-b1U" firstAttribute="top" secondItem="0Dl-qw-zYj" secondAttribute="top" id="bnv-RG-b0A"/>
@@ -106,7 +117,7 @@
                                     <action selector="addButtonTapped:" destination="sco-d1-ONW" id="kqu-W2-6IE"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="arrow.up.arrow.down.circle" catalog="system" id="j9x-fd-4DP">
+                            <barButtonItem title="⇅" id="j9x-fd-4DP">
                                 <connections>
                                     <action selector="editButtonTapped:" destination="sco-d1-ONW" id="n7S-T8-Gcr"/>
                                 </connections>
@@ -129,12 +140,18 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e4O-Cx-cvp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="To do" image="checkmark" catalog="system" id="1EA-eC-iLw"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Jcw-5r-tc0">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Jcw-5r-tc0">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.13177084758386529" green="0.29420569858024437" blue="0.57695185862383425" alpha="0.71013974469999996" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.13177084759999999" green="0.29420569860000001" blue="0.57695185859999998" alpha="0.71013974469999996" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>
@@ -147,7 +164,7 @@
             </objects>
             <point key="canvasLocation" x="-138" y="-449"/>
         </scene>
-        <!--Category-->
+        <!--Do's Category-->
         <scene sceneID="gIH-z9-iec">
             <objects>
                 <viewController id="8b5-OF-CSB" customClass="ToDoCategoryViewController" customModule="TodoList" customModuleProvider="target" sceneMemberID="viewController">
@@ -159,13 +176,38 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CategoryCell" id="Uh4-Fm-iHQ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CategoryCell" id="Uh4-Fm-iHQ" customClass="DoCategoryTableViewCell" customModule="TodoList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uh4-Fm-iHQ" id="RgO-wb-9VG">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcg-4M-79C">
+                                                    <rect key="frame" x="28" y="11.5" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5p-m9-Q7i">
+                                                    <rect key="frame" x="86" y="11.5" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="b5p-m9-Q7i" secondAttribute="trailing" constant="20" id="48b-AO-tD0"/>
+                                                <constraint firstItem="b5p-m9-Q7i" firstAttribute="centerY" secondItem="RgO-wb-9VG" secondAttribute="centerY" id="D1I-qA-Cff"/>
+                                                <constraint firstItem="b5p-m9-Q7i" firstAttribute="leading" secondItem="jcg-4M-79C" secondAttribute="trailing" constant="16" id="QWH-fW-wFo"/>
+                                                <constraint firstItem="jcg-4M-79C" firstAttribute="leading" secondItem="RgO-wb-9VG" secondAttribute="leadingMargin" constant="8" id="Umf-bn-2OK"/>
+                                                <constraint firstItem="jcg-4M-79C" firstAttribute="centerY" secondItem="RgO-wb-9VG" secondAttribute="centerY" id="Wiu-3h-Tdd"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="detailLabel" destination="b5p-m9-Q7i" id="qU3-1v-geN"/>
+                                            <outlet property="titleLabel" destination="jcg-4M-79C" id="HRC-3m-Vdw"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -179,15 +221,23 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Tb-k5-abN"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Category" id="FN1-Pa-tmO">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="GJs-XW-rdY">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="addButtonTapped:" destination="8b5-OF-CSB" id="ReS-nQ-pV5"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" title="Do's Category" id="FN1-Pa-tmO">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="GJs-XW-rdY">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="8b5-OF-CSB" id="ReS-nQ-pV5"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="⇅" id="3GQ-fq-xeh">
+                                <connections>
+                                    <action selector="editButtonTapped:" destination="8b5-OF-CSB" id="O12-ZY-ZUJ"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="3GQ-fq-xeh" id="dVi-zB-hZ8"/>
                         <outlet property="tableView" destination="91i-rj-C3B" id="d5s-RG-EnI"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="goToItem" id="hDv-fw-AXq"/>
                     </connections>
@@ -222,11 +272,15 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cpM-2c-iOR" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="To buy" image="gift" catalog="system" id="hNN-lK-8ba"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ton-rm-Fip">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="ton-rm-Fip">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.27633100003607081" green="0.53996251006200524" blue="0.34223887754255439" alpha="0.80221170774647887" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.20000000000000001" green="0.73238929600000002" blue="0.42455878029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.31305986079999998" green="0.61173226390000002" blue="0.3877279616" alpha="0.80221170770000005" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -237,7 +291,7 @@
             </objects>
             <point key="canvasLocation" x="-139.13043478260872" y="280.58035714285711"/>
         </scene>
-        <!--Category-->
+        <!--Buy's Category-->
         <scene sceneID="K7X-m2-tkI">
             <objects>
                 <viewController id="QaO-c8-lgH" customClass="ToBuyCategoryViewController" customModule="TodoList" customModuleProvider="target" sceneMemberID="viewController">
@@ -249,13 +303,38 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CategoryCell" id="9dr-SX-g5A">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CategoryCell" id="9dr-SX-g5A" customClass="BuyCategoryTableViewCell" customModule="TodoList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9dr-SX-g5A" id="GcO-Rm-Q2k">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1PX-FE-LFA">
+                                                    <rect key="frame" x="28" y="11.5" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haE-R1-4uv">
+                                                    <rect key="frame" x="86" y="11.5" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="1PX-FE-LFA" firstAttribute="leading" secondItem="GcO-Rm-Q2k" secondAttribute="leadingMargin" constant="8" id="9M2-sd-vQw"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="haE-R1-4uv" secondAttribute="trailing" constant="20" id="aE1-0S-ZrR"/>
+                                                <constraint firstItem="haE-R1-4uv" firstAttribute="centerY" secondItem="GcO-Rm-Q2k" secondAttribute="centerY" id="l5U-Jf-tW0"/>
+                                                <constraint firstItem="haE-R1-4uv" firstAttribute="leading" secondItem="1PX-FE-LFA" secondAttribute="trailing" constant="16" id="tDD-6r-Woe"/>
+                                                <constraint firstItem="1PX-FE-LFA" firstAttribute="centerY" secondItem="GcO-Rm-Q2k" secondAttribute="centerY" id="tyd-TL-skH"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="detailLabel" destination="haE-R1-4uv" id="5Xh-tk-UZs"/>
+                                            <outlet property="titleLabel" destination="1PX-FE-LFA" id="rI4-Rw-nu2"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -269,14 +348,22 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UvS-4N-P0f"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Category" id="GXr-B1-UPe">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="4iW-aJ-6CT">
-                            <connections>
-                                <action selector="addButtonTapped:" destination="QaO-c8-lgH" id="URN-qA-yrR"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" title="Buy's Category" id="GXr-B1-UPe">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="4iW-aJ-6CT">
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="QaO-c8-lgH" id="URN-qA-yrR"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="⇅" id="hX4-cY-82f">
+                                <connections>
+                                    <action selector="editButtonTapped:" destination="QaO-c8-lgH" id="ED5-80-wd5"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="hX4-cY-82f" id="dTs-td-Ei1"/>
                         <outlet property="tableView" destination="oe2-fG-UeC" id="h6u-qN-Sds"/>
                         <segue destination="sco-d1-ONW" kind="show" identifier="goToItem" id="4pU-rr-qBe"/>
                     </connections>
@@ -287,7 +374,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.up.arrow.down.circle" catalog="system" width="128" height="121"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="checkmark.shield" catalog="system" width="128" height="121"/>
         <image name="gift" catalog="system" width="128" height="121"/>

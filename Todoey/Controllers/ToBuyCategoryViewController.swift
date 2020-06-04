@@ -13,20 +13,41 @@ class ToBuyCategoryViewController: UIViewController {
     
     let realm = try! Realm()
     
-    var categories = [BuyCategory]()
-    
-//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var categories: Results<BuyCategory>?
 
+    @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.largeTitleTextAttributes =
+            [NSAttributedString.Key.foregroundColor: UIColor.black,
+             NSAttributedString.Key.font: UIFont(name: "Cafe24Dangdanghae", size: 32) ?? UIFont.systemFont(ofSize: 30)]
 
         tableView.delegate = self
         tableView.dataSource = self
         
-//        loadCategories()
+        loadCategories()
     }
+    
+    @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
+        
+        tableView.isEditing = !tableView.isEditing
+        
+        switch tableView.isEditing {
+        case true:
+            editButton.title = "Done"
+        case false:
+            editButton.title = "⇅"
+        }
+    }
+    
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         
@@ -40,9 +61,9 @@ class ToBuyCategoryViewController: UIViewController {
                 
                 let newCategory = BuyCategory()
                 newCategory.name = textField.text!
+                newCategory.orderPosition = self.categories!.count
                 
-                self.categories.append(newCategory)
-//                self.saveCategories()
+                self.save(category: newCategory)
             }
             
         }
@@ -55,39 +76,76 @@ class ToBuyCategoryViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-//    func saveCategories() {
-//        do {
-//            try context.save()
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//        self.tableView.reloadData()
-//    }
+    func save(category: BuyCategory) {
+        do {
+            try realm.write {
+                realm.add(category)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        self.tableView.reloadData()
+    }
     
-//    func loadCategories() {
-//        let request: NSFetchRequest<BuyCategory> = BuyCategory.fetchRequest()
-//        do {
-//            categories = try context.fetch(request)
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//        self.tableView.reloadData()
-//    }
+    func loadCategories() {
+        
+        categories = realm.objects(BuyCategory.self).sorted(byKeyPath: "orderPosition", ascending: true)
+        
+        self.tableView.reloadData()
+    }
     
 }
 
 extension ToBuyCategoryViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return categories?.count ?? 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as! BuyCategoryTableViewCell
         
-        cell.textLabel?.text = categories[indexPath.row].name
-        
+        if let category = categories?[indexPath.row] {
+            
+            var i = 0
+            
+            if category.item.count > 0 {
+                for num in 0...category.item.count - 1 {
+                    if !category.item[num].done {
+                        i += 1
+                    }
+                }
+                cell.titleLabel.text = "‣ \(category.name)"
+                cell.detailLabel.text = "(\(i)/\(category.item.count))"
+                cell.detailLabel?.font = .systemFont(ofSize: 14)
+                cell.backgroundColor = .white
+                
+                if i == 0 {
+                    cell.titleLabel.font = .italicSystemFont(ofSize: 18)
+                    cell.titleLabel.textColor = .systemPurple
+                    cell.detailLabel.textColor = .systemPink
+                    cell.backgroundColor = UIColor(red: 50/255, green: 200/255, blue: 200/255, alpha: 1)
+                    
+                } else {
+                    cell.titleLabel.font = .systemFont(ofSize: 19, weight: .medium)
+                    cell.titleLabel.textColor = .black
+                    cell.detailLabel.textColor = .black
+                    cell.backgroundColor = .white
+                }
+                
+            } else {
+                
+                cell.titleLabel.text = "‣ \(category.name)"
+                cell.titleLabel.font = .systemFont(ofSize: 19, weight: .medium)
+                cell.detailLabel.text = "(0/\(category.item.count))"
+                cell.detailLabel.font = .systemFont(ofSize: 14)
+            }
+        }
         return cell
     }
     
@@ -96,7 +154,7 @@ extension ToBuyCategoryViewController: UITableViewDataSource, UITableViewDelegat
         let destination = segue.destination as! ToBuyViewController
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            destination.selectedCategory = categories[indexPath.row]
+            destination.selectedCategory = categories?[indexPath.row]
         }
     }
     
@@ -106,15 +164,55 @@ extension ToBuyCategoryViewController: UITableViewDataSource, UITableViewDelegat
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//
-//        if editingStyle == .delete {
-//            context.delete(categories[indexPath.row])
-//            categories.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        }
-//    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+
+        if editingStyle == .delete {
+            if let item = categories?[indexPath.row] {
+                do {
+                    try realm.write {
+                        realm.delete(item)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
     
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        do {
+            try realm.write {
+                let sourceObject = categories![sourceIndexPath.row]
+                let destinationObject = categories![destinationIndexPath.row]
+                
+                let destinationObjectOrder = destinationObject.orderPosition
+                
+                if sourceIndexPath.row < destinationIndexPath.row {
+                    
+                    for index in sourceIndexPath.row...destinationIndexPath.row {
+                        let category = categories![index]
+                        category.orderPosition -= 1
+                    }
+                } else {
+                    
+                    for index in (destinationIndexPath.row..<sourceIndexPath.row).reversed() {
+                        let category = categories![index]
+                        category.orderPosition += 1
+                    }
+                }
+                
+                sourceObject.orderPosition = destinationObjectOrder
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+
+    }
     
 }

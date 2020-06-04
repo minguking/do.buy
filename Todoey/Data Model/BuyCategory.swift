@@ -11,6 +11,7 @@ import RealmSwift
 
 class BuyCategory: Object {
     @objc dynamic var name: String = ""
+    @objc dynamic var orderPosition: Int = 0
     
     let item = List<BuyItem>()
 }
