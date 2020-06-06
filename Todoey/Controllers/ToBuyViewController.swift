@@ -47,11 +47,9 @@ class ToBuyViewController: UIViewController {
         switch tableView.isEditing {
         case true:
             editButton.title = "Done"
-            
         case false:
             editButton.title = "⇅"
         }
-        
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
@@ -62,7 +60,8 @@ class ToBuyViewController: UIViewController {
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         let add = UIAlertAction(title: "Add item", style: .default) { action in
             
-            if textField.text != "" {
+            if textField.text?.replacingOccurrences(of: " ", with: "") != "" {
+                
                 if let currentCategory = self.selectedCategory {
                     do {
                         try self.realm.write {
@@ -96,6 +95,8 @@ class ToBuyViewController: UIViewController {
         if let order = buyItems?.last?.orderPosition {
             self.i = order + 1
         }
+        
+        tableView?.reloadData()
     }
     
 }
@@ -116,7 +117,7 @@ extension ToBuyViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryType = item.done ? .checkmark : .none
             cell.accessoryType = item.done == true ? .checkmark : .none
             cell.textLabel?.font = item.done ? .italicSystemFont(ofSize: 16) : .systemFont(ofSize: 17, weight: .medium)
-            cell.textLabel?.textColor = item.done ? .systemGray : .black
+            cell.textLabel?.textColor = item.done ? .systemGray : .none
             
         } else {
             cell.textLabel?.text = "No item added"

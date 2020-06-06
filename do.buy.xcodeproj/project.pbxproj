@@ -172,14 +172,14 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1120;
 				LastUpgradeCheck = 1120;
-				ORGANIZATIONNAME = "App Brewery";
+				ORGANIZATIONNAME = "Mingu Kang";
 				TargetAttributes = {
 					EB2BE4F5239524DB00FB933B = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
 				};
 			};
-			buildConfigurationList = EB2BE4F1239524DB00FB933B /* Build configuration list for PBXProject "Todoey" */;
+			buildConfigurationList = EB2BE4F1239524DB00FB933B /* Build configuration list for PBXProject "do.buy" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -414,6 +414,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 3YAPL3Q6FM;
 				INFOPLIST_FILE = Todoey/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -421,6 +422,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mingus.todoList-ios13.TodoListMingus";
 				PRODUCT_NAME = do.buy;
 				SWIFT_VERSION = 5.0;
@@ -434,6 +436,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 3YAPL3Q6FM;
 				INFOPLIST_FILE = Todoey/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -441,6 +444,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mingus.todoList-ios13.TodoListMingus";
 				PRODUCT_NAME = do.buy;
 				SWIFT_VERSION = 5.0;
@@ -451,7 +455,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EB2BE4F1239524DB00FB933B /* Build configuration list for PBXProject "Todoey" */ = {
+		EB2BE4F1239524DB00FB933B /* Build configuration list for PBXProject "do.buy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EB2BE508239524DC00FB933B /* Debug */,

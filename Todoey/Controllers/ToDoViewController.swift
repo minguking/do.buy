@@ -62,7 +62,7 @@ class ToDoViewController: UIViewController {
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         let add = UIAlertAction(title: "Add item", style: .default) { action in
             
-            if textField.text != "" {
+            if textField.text?.replacingOccurrences(of: " ", with: "") != "" {
                 
                 if let currentCategory = self.selectedCategory {
                     do {
@@ -78,7 +78,6 @@ class ToDoViewController: UIViewController {
                     }
                 }
             }
-            
             self.tableView.reloadData()
         }
         
@@ -93,7 +92,6 @@ class ToDoViewController: UIViewController {
     }
     
     func loadItems() {
-        
         toDoItems = selectedCategory?.items.sorted(byKeyPath: "orderPosition", ascending: true)
         
         if let order = toDoItems?.last?.orderPosition {
@@ -120,7 +118,7 @@ extension ToDoViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = item.title
             cell.accessoryType = item.done ? .checkmark : .none
             cell.textLabel?.font = item.done ? .italicSystemFont(ofSize: 16) : .systemFont(ofSize: 17, weight: .medium)
-            cell.textLabel?.textColor = item.done ? .systemGray : .black
+            cell.textLabel?.textColor = item.done ? .systemGray : .none
             
         } else {
             cell.textLabel?.text = "No items added"

@@ -59,12 +59,11 @@ class ToBuyCategoryViewController: UIViewController {
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         let add = UIAlertAction(title: "Add item", style: .default) { action in
             
-            if textField.text != "" {
+            if textField.text?.replacingOccurrences(of: " ", with: "") != "" {
                 
                 let newCategory = BuyCategory()
                 newCategory.name = textField.text!
                 newCategory.orderPosition = self.i
-                self.i += 1
                 
                 self.save(category: newCategory, i: self.i)
             }
@@ -129,10 +128,11 @@ extension ToBuyCategoryViewController: UITableViewDataSource, UITableViewDelegat
                         i += 1
                     }
                 }
+                
                 cell.titleLabel.text = "‣ \(category.name)"
                 cell.detailLabel.text = "(\(i)/\(category.item.count))"
                 cell.detailLabel?.font = .systemFont(ofSize: 14)
-                cell.backgroundColor = .white
+                cell.backgroundColor = .clear
                 
                 if i == 0 {
                     cell.titleLabel.font = .italicSystemFont(ofSize: 18)
@@ -142,9 +142,9 @@ extension ToBuyCategoryViewController: UITableViewDataSource, UITableViewDelegat
                     
                 } else {
                     cell.titleLabel.font = .systemFont(ofSize: 19, weight: .medium)
-                    cell.titleLabel.textColor = .black
-                    cell.detailLabel.textColor = .black
-                    cell.backgroundColor = .white
+                    cell.titleLabel.textColor = .none
+                    cell.detailLabel.textColor = .none
+                    cell.backgroundColor = .clear
                 }
                 
             } else {
@@ -153,6 +153,9 @@ extension ToBuyCategoryViewController: UITableViewDataSource, UITableViewDelegat
                 cell.titleLabel.font = .systemFont(ofSize: 19, weight: .medium)
                 cell.detailLabel.text = "(0/\(category.item.count))"
                 cell.detailLabel.font = .systemFont(ofSize: 14)
+                cell.backgroundColor = .clear
+                cell.titleLabel.textColor = .none
+                cell.detailLabel.textColor = .none
             }
         }
         return cell
@@ -179,6 +182,7 @@ extension ToBuyCategoryViewController: UITableViewDataSource, UITableViewDelegat
             if let item = categories?[indexPath.row] {
                 do {
                     try realm.write {
+                        realm.delete(item.item)
                         realm.delete(item)
                     }
                 } catch {
