@@ -11,6 +11,8 @@ import RealmSwift
 
 class ToBuyViewController: UIViewController {
     
+    var i = 0
+    
     let realm = try! Realm()
     
     var buyItems: Results<BuyItem>?
@@ -66,7 +68,8 @@ class ToBuyViewController: UIViewController {
                         try self.realm.write {
                             let newItem = BuyItem()
                             newItem.title = textField.text!
-                            newItem.orderPosition = self.buyItems!.count
+                            newItem.orderPosition = self.i
+                            self.i += 1
                             currentCategory.item.append(newItem)
                         }
                     } catch {
@@ -88,9 +91,11 @@ class ToBuyViewController: UIViewController {
     }
     
     func loadItems() {
-        
         buyItems = selectedCategory?.item.sorted(byKeyPath: "orderPosition", ascending: true)
         
+        if let order = buyItems?.last?.orderPosition {
+            self.i = order + 1
+        }
     }
     
 }

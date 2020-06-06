@@ -11,6 +11,8 @@ import RealmSwift
 
 class ToDoViewController: UIViewController {
     
+    var i = 0
+    
     let realm = try! Realm()
 
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -56,7 +58,7 @@ class ToDoViewController: UIViewController {
         
         var textField = UITextField()
         
-        let alert = UIAlertController(title: "Add new thing to do", message: "anything", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add new thing to do", message: "", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         let add = UIAlertAction(title: "Add item", style: .default) { action in
             
@@ -67,7 +69,8 @@ class ToDoViewController: UIViewController {
                         try self.realm.write {
                             let newItem = Item()
                             newItem.title = textField.text!
-                            newItem.orderPosition = self.toDoItems!.count
+                            newItem.orderPosition = self.i
+                            self.i += 1
                             currentCategory.items.append(newItem)
                         }
                     } catch {
@@ -92,6 +95,10 @@ class ToDoViewController: UIViewController {
     func loadItems() {
         
         toDoItems = selectedCategory?.items.sorted(byKeyPath: "orderPosition", ascending: true)
+        
+        if let order = toDoItems?.last?.orderPosition {
+            self.i = order + 1
+        }
         
         tableView?.reloadData()
 

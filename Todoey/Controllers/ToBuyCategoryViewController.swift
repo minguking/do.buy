@@ -11,6 +11,8 @@ import RealmSwift
 
 class ToBuyCategoryViewController: UIViewController {
     
+    var i = 0
+    
     let realm = try! Realm()
     
     var categories: Results<BuyCategory>?
@@ -61,9 +63,10 @@ class ToBuyCategoryViewController: UIViewController {
                 
                 let newCategory = BuyCategory()
                 newCategory.name = textField.text!
-                newCategory.orderPosition = self.categories!.count
+                newCategory.orderPosition = self.i
+                self.i += 1
                 
-                self.save(category: newCategory)
+                self.save(category: newCategory, i: self.i)
             }
             
         }
@@ -76,10 +79,12 @@ class ToBuyCategoryViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func save(category: BuyCategory) {
+    func save(category: BuyCategory, i: Int) {
         do {
             try realm.write {
                 realm.add(category)
+                category.orderPosition = i
+                self.i += 1
             }
         } catch {
             print(error.localizedDescription)
@@ -90,6 +95,10 @@ class ToBuyCategoryViewController: UIViewController {
     func loadCategories() {
         
         categories = realm.objects(BuyCategory.self).sorted(byKeyPath: "orderPosition", ascending: true)
+        
+        if let order = categories?.last?.orderPosition {
+            self.i = order + 1
+        }
         
         self.tableView.reloadData()
     }
