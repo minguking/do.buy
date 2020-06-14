@@ -1,23 +1,27 @@
 //
 //  DoCategoryTableViewCell.swift
-//  Todoey
+//  do.buy
 //
-//  Created by Kang Mingu on 2020/06/04.
-//  Copyright © 2020 App Brewery. All rights reserved.
+//  Created by Mingu Kang on June/2020.
+//  Copyright 2020 Mingu. All rights reserved.
 //
 
 import UIKit
+import RealmSwift
 
 class DoCategoryTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var detailLabel: UILabel!
     
-    override func awakeFromNib() {
+    let realm = try! Realm()
+
+    @IBOutlet weak var dot: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var title: UITextField!
+    
+    override func awakeFromNib() { 
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

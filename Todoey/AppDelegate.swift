@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  Destini
+//  do.buy
 //
-//  Created by Philipp Muellauer on 01/09/2015.
-//  Copyright (c) 2015 London App Brewery. All rights reserved.
+//  Created by Mingu Kang on June/2020.
+//  Copyright 2020 Mingu. All rights reserved.
 //
 
 import UIKit
@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        print(Realm.Configuration.defaultConfiguration.fileURL)
+        print(Realm.Configuration.defaultConfiguration.fileURL)
 
 //        do {
 //            let realm = try Realm()

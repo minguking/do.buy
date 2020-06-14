@@ -1,16 +1,17 @@
 //
 //  BuyCategoryTableViewCell.swift
-//  Todoey
+//  do.buy
 //
-//  Created by Kang Mingu on 2020/06/04.
-//  Copyright © 2020 App Brewery. All rights reserved.
+//  Created by Mingu Kang on June/2020.
+//  Copyright 2020 Mingu. All rights reserved.
 //
 
 import UIKit
 
 class BuyCategoryTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var title: UITextField!
+    @IBOutlet weak var dot: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
     
     override func awakeFromNib() {

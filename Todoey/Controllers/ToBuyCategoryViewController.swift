@@ -1,9 +1,9 @@
 //
 //  ToBuyCategoryViewController.swift
-//  Todoey
+//  do.buy
 //
-//  Created by Kang Mingu on 2020/06/01.
-//  Copyright © 2020 App Brewery. All rights reserved.
+//  Created by Mingu Kang on June/2020.
+//  Copyright 2020 Mingu. All rights reserved.
 //
 
 import UIKit
@@ -12,6 +12,7 @@ import RealmSwift
 class ToBuyCategoryViewController: UIViewController {
     
     var i = 0
+    var k = 0
     
     let realm = try! Realm()
     
@@ -41,13 +42,30 @@ class ToBuyCategoryViewController: UIViewController {
     @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
         
         tableView.isEditing = !tableView.isEditing
-        
-        switch tableView.isEditing {
-        case true:
-            editButton.title = "Done"
-        case false:
-            editButton.title = "⇅"
+        tableView.visibleCells.forEach { cell in
+            guard let cell = cell as? BuyCategoryTableViewCell else { return }
+            
+            switch tableView.isEditing {
+            case true:
+                editButton.title = "Done"
+                cell.title.isEnabled = true
+            case false:
+                editButton.title = "⇅"
+                cell.title.isEnabled = false
+                
+                do {
+                    try realm.write {
+                        categories![k].name = cell.title.text!
+                        k += 1
+                    }
+                    tableView.reloadData()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
         }
+        
+        
     }
     
     
@@ -116,7 +134,15 @@ extension ToBuyCategoryViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        self.k = 0
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as! BuyCategoryTableViewCell
+        
+        if tableView.isEditing {
+            cell.title.isEnabled = true
+        } else {
+            cell.title.isEnabled = false
+        }
         
         if let category = categories?[indexPath.row] {
             
@@ -129,32 +155,32 @@ extension ToBuyCategoryViewController: UITableViewDataSource, UITableViewDelegat
                     }
                 }
                 
-                cell.titleLabel.text = "‣ \(category.name)"
+                cell.title.text = category.name
                 cell.detailLabel.text = "(\(i)/\(category.item.count))"
                 cell.detailLabel?.font = .systemFont(ofSize: 14)
                 cell.backgroundColor = .clear
                 
                 if i == 0 {
-                    cell.titleLabel.font = .italicSystemFont(ofSize: 18)
-                    cell.titleLabel.textColor = .systemPurple
+                    cell.title.font = .italicSystemFont(ofSize: 18)
+                    cell.title.textColor = .systemPurple
                     cell.detailLabel.textColor = .systemPink
                     cell.backgroundColor = UIColor(red: 50/255, green: 200/255, blue: 200/255, alpha: 1)
                     
                 } else {
-                    cell.titleLabel.font = .systemFont(ofSize: 19, weight: .medium)
-                    cell.titleLabel.textColor = .none
+                    cell.title.font = .systemFont(ofSize: 19, weight: .medium)
+                    cell.title.textColor = .none
                     cell.detailLabel.textColor = .none
                     cell.backgroundColor = .clear
                 }
                 
             } else {
                 
-                cell.titleLabel.text = "‣ \(category.name)"
-                cell.titleLabel.font = .systemFont(ofSize: 19, weight: .medium)
+                cell.title.text = category.name
+                cell.title.font = .systemFont(ofSize: 19, weight: .medium)
                 cell.detailLabel.text = "(0/\(category.item.count))"
                 cell.detailLabel.font = .systemFont(ofSize: 14)
                 cell.backgroundColor = .clear
-                cell.titleLabel.textColor = .none
+                cell.title.textColor = .none
                 cell.detailLabel.textColor = .none
             }
         }

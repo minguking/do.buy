@@ -1,9 +1,9 @@
 //
 //  CategoryViewController.swift
-//  Todoey
+//  do.buy
 //
-//  Created by Kang Mingu on 2020/05/31.
-//  Copyright © 2020 App Brewery. All rights reserved.
+//  Created by Mingu Kang on June/2020.
+//  Copyright 2020 Mingu. All rights reserved.
 //
 
 import UIKit
@@ -12,6 +12,7 @@ import RealmSwift
 class ToDoCategoryViewController: UIViewController {
     
     var i = 0
+    var k = 0
     
     let realm = try! Realm()
     
@@ -42,12 +43,31 @@ class ToDoCategoryViewController: UIViewController {
     @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
         
         tableView.isEditing = !tableView.isEditing
-        
-        switch tableView.isEditing {
-        case true:
-            editButton.title = "Done"
-        case false:
-            editButton.title = "⇅"
+        tableView.visibleCells.forEach { cell in
+            guard let cell = cell as? DoCategoryTableViewCell else { return }
+            
+            switch tableView.isEditing {
+            case true:
+                editButton.title = "Done"
+                cell.title.isEnabled = true
+                cell.title.borderStyle = .roundedRect
+                
+            case false:
+                editButton.title = "⇅"
+                cell.title.isEnabled = false
+                cell.title.borderStyle = .none
+                
+                do {
+                    try realm.write {
+                        self.categories![k].name = cell.title.text!
+                        k += 1
+                    }
+                    tableView.reloadData()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            
         }
     }
     
@@ -116,7 +136,16 @@ extension ToDoCategoryViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        self.k = 0
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as! DoCategoryTableViewCell
+        
+        if tableView.isEditing {
+            cell.title.isEnabled = true
+            
+        } else {
+            cell.title.isEnabled = false
+        }
         
         if let category = categories?[indexPath.row] {
             
@@ -129,31 +158,31 @@ extension ToDoCategoryViewController: UITableViewDataSource, UITableViewDelegate
                     }
                 }
                 
-                cell.titleLabel.text = "• \(category.name)"
+                cell.title.text = category.name
                 cell.detailLabel.text =  "(\(j)/\(category.items.count))"
                 cell.detailLabel.font = .systemFont(ofSize: 14)
                 cell.backgroundColor = .clear
                 
                 if j == 0 {
-                    cell.titleLabel.font = .italicSystemFont(ofSize: 18)
-                    cell.titleLabel.textColor = .purple
+                    cell.title.font = .italicSystemFont(ofSize: 18)
+                    cell.title.textColor = .purple
                     cell.detailLabel.textColor = .systemBlue
                     cell.backgroundColor = UIColor(red: 200/255, green: 255/255, blue: 80/255, alpha: 0.9)
                     
                 } else {
-                    cell.titleLabel.textColor = .none
-                    cell.titleLabel.font = .systemFont(ofSize: 19, weight: .medium)
+                    cell.title.textColor = .none
+                    cell.title.font = .systemFont(ofSize: 19, weight: .medium)
                     cell.detailLabel.textColor = .none
                     cell.backgroundColor = .clear
                 }
                 
             } else {
                 
-                cell.titleLabel.text = "• \(category.name)"
-                cell.titleLabel.font = .systemFont(ofSize: 19, weight: .medium)
+                cell.title.text = category.name
+                cell.title.font = .systemFont(ofSize: 19, weight: .medium)
+                cell.title.textColor = .none
                 cell.detailLabel.text =  "(0/\(category.items.count))"
                 cell.detailLabel.font = .systemFont(ofSize: 14)
-                cell.titleLabel.textColor = .none
                 cell.detailLabel.textColor = .none
                 cell.backgroundColor = .clear
             }
@@ -171,11 +200,13 @@ extension ToDoCategoryViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         performSegue(withIdentifier: "goToItem", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete {
             
             if let item = categories?[indexPath.row] {
@@ -202,6 +233,7 @@ extension ToDoCategoryViewController: UITableViewDataSource, UITableViewDelegate
         
         do {
             try realm.write {
+                
                 let sourceObject = categories![sourceIndexPath.row]
                 let destinationObject = categories![destinationIndexPath.row]
                 
@@ -227,7 +259,5 @@ extension ToDoCategoryViewController: UITableViewDataSource, UITableViewDelegate
             print(error.localizedDescription)
         }
     }
-    
-    
     
 }

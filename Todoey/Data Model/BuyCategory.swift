@@ -1,9 +1,9 @@
 //
 //  BuyCategory.swift
-//  Todoey
+//  do.buy
 //
-//  Created by Kang Mingu on 2020/06/01.
-//  Copyright © 2020 App Brewery. All rights reserved.
+//  Created by Mingu Kang on June/2020.
+//  Copyright 2020 Mingu. All rights reserved.
 //
 
 import Foundation
