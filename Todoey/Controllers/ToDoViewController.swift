@@ -27,8 +27,19 @@ class ToDoViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        view.backgroundColor = UIColor(red: 34/255, green: 75/255, blue: 147/255, alpha: 1.0)
+        
+        navigationController?.navigationBar.largeTitleTextAttributes =
+        [NSAttributedString.Key.foregroundColor: UIColor.white,
+         NSAttributedString.Key.font: UIFont(name: "Cafe24Dangdanghae", size: 28) ?? UIFont.systemFont(ofSize: 30)]
         
         loadItems()
         navigationItem.title = selectedCategory?.name

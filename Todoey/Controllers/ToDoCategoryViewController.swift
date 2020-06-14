@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 
+
 class ToDoCategoryViewController: UIViewController {
     
     var i = 0
@@ -24,14 +25,22 @@ class ToDoCategoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        view.backgroundColor = UIColor(red: 34/255, green: 75/255, blue: 147/255, alpha: 1.0)
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = UIColor(red: 34/255, green: 75/255, blue: 147/255, alpha: 1.0)
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes =
             [NSAttributedString.Key.foregroundColor: UIColor.white,
              NSAttributedString.Key.font: UIFont(name: "Cafe24Dangdanghae", size: 34) ?? UIFont.systemFont(ofSize: 30)]
+        
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -167,7 +176,7 @@ extension ToDoCategoryViewController: UITableViewDataSource, UITableViewDelegate
                     cell.title.font = .italicSystemFont(ofSize: 18)
                     cell.title.textColor = .purple
                     cell.detailLabel.textColor = .systemBlue
-                    cell.backgroundColor = UIColor(red: 200/255, green: 255/255, blue: 80/255, alpha: 0.9)
+                    cell.backgroundColor = UIColor(red: 200/255, green: 255/255, blue: 80/255, alpha: 0.7)
                     
                 } else {
                     cell.title.textColor = .none

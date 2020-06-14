@@ -29,6 +29,10 @@ class ToBuyCategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = UIColor(red: 80/255, green: 156/255, blue: 99/255, alpha: 1.0)
+        
         navigationController?.navigationBar.largeTitleTextAttributes =
             [NSAttributedString.Key.foregroundColor: UIColor.black,
              NSAttributedString.Key.font: UIFont(name: "Cafe24Dangdanghae", size: 32) ?? UIFont.systemFont(ofSize: 30)]
@@ -49,9 +53,11 @@ class ToBuyCategoryViewController: UIViewController {
             case true:
                 editButton.title = "Done"
                 cell.title.isEnabled = true
+                cell.title.borderStyle = .roundedRect
             case false:
                 editButton.title = "⇅"
                 cell.title.isEnabled = false
+                cell.title.borderStyle = .none
                 
                 do {
                     try realm.write {
@@ -164,7 +170,7 @@ extension ToBuyCategoryViewController: UITableViewDataSource, UITableViewDelegat
                     cell.title.font = .italicSystemFont(ofSize: 18)
                     cell.title.textColor = .systemPurple
                     cell.detailLabel.textColor = .systemPink
-                    cell.backgroundColor = UIColor(red: 50/255, green: 200/255, blue: 200/255, alpha: 1)
+                    cell.backgroundColor = UIColor(red: 50/255, green: 200/255, blue: 200/255, alpha: 0.7)
                     
                 } else {
                     cell.title.font = .systemFont(ofSize: 19, weight: .medium)

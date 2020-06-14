@@ -45,7 +45,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Todo" image="checkmark.shield" catalog="system" id="VxB-fq-k9b"/>
-                    <navigationItem key="navigationItem" title="To do" id="ak1-XO-kgx">
+                    <navigationItem key="navigationItem" title="To do" largeTitleDisplayMode="always" id="ak1-XO-kgx">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="89K-2e-RF9">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -110,7 +110,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0Dl-qw-zYj"/>
                     </view>
-                    <navigationItem key="navigationItem" title="What to buy" id="aLB-wV-Iqc">
+                    <navigationItem key="navigationItem" title="What to buy" largeTitleDisplayMode="always" id="aLB-wV-Iqc">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="7UZ-0k-jqh">
                                 <connections>
@@ -140,19 +140,17 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e4O-Cx-cvp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="To do" image="checkmark" catalog="system" id="1EA-eC-iLw"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Jcw-5r-tc0">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Jcw-5r-tc0">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.13177084758386529" green="0.29420569858024437" blue="0.57695185862383425" alpha="0.71013974469999996" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.13177084759999999" green="0.29420569860000001" blue="0.57695185859999998" alpha="0.71013974469999996" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -172,7 +170,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="91i-rj-C3B">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="91i-rj-C3B">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -235,7 +233,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Tb-k5-abN"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Do's Category" id="FN1-Pa-tmO">
+                    <navigationItem key="navigationItem" title="Do's Category" largeTitleDisplayMode="always" id="FN1-Pa-tmO">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="GJs-XW-rdY">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -293,7 +291,7 @@
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.31305986079999998" green="0.61173226390000002" blue="0.3877279616" alpha="0.80221170770000005" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -313,7 +311,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oe2-fG-UeC">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oe2-fG-UeC">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -370,7 +368,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UvS-4N-P0f"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Buy's Category" id="GXr-B1-UPe">
+                    <navigationItem key="navigationItem" title="Buy's Category" largeTitleDisplayMode="always" id="GXr-B1-UPe">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="4iW-aJ-6CT">
                                 <connections>

@@ -31,6 +31,10 @@ class ToBuyViewController: UIViewController {
         super.viewDidLoad()
         loadItems()
         
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = UIColor(red: 80/255, green: 156/255, blue: 99/255, alpha: 1.0)
+        
         navigationItem.title = selectedCategory?.name
         
         tableView.dataSource = self
