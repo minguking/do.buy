@@ -31,7 +31,12 @@ class ToDoCategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        view.backgroundColor = UIColor(red: 34/255, green: 75/255, blue: 147/255, alpha: 1.0)
+        let longPressGesture = UILongPressGestureRecognizer()
+        self.view.addGestureRecognizer(longPressGesture)
+        longPressGesture.addTarget(self, action: #selector(longPressed))
+        
+        tableView.addGestureRecognizer(longPressGesture)
+        
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor(red: 34/255, green: 75/255, blue: 147/255, alpha: 1.0)
@@ -46,6 +51,10 @@ class ToDoCategoryViewController: UIViewController {
         tableView.delegate = self
         
         loadCategories()
+        
+    }
+    
+    @objc func longPressed(_ gesture: UILongPressGestureRecognizer) {
         
     }
     
@@ -168,6 +177,7 @@ extension ToDoCategoryViewController: UITableViewDataSource, UITableViewDelegate
                 }
                 
                 cell.title.text = category.name
+                cell.title.textColor = UIColor(named: "customTextColor")
                 cell.detailLabel.text =  "(\(j)/\(category.items.count))"
                 cell.detailLabel.font = .systemFont(ofSize: 14)
                 cell.backgroundColor = .clear
@@ -179,7 +189,7 @@ extension ToDoCategoryViewController: UITableViewDataSource, UITableViewDelegate
                     cell.backgroundColor = UIColor(red: 200/255, green: 255/255, blue: 80/255, alpha: 0.7)
                     
                 } else {
-                    cell.title.textColor = .none
+                    cell.title.textColor = UIColor(named: "customTextColor")
                     cell.title.font = .systemFont(ofSize: 19, weight: .medium)
                     cell.detailLabel.textColor = .none
                     cell.backgroundColor = .clear
@@ -189,7 +199,7 @@ extension ToDoCategoryViewController: UITableViewDataSource, UITableViewDelegate
                 
                 cell.title.text = category.name
                 cell.title.font = .systemFont(ofSize: 19, weight: .medium)
-                cell.title.textColor = .none
+                cell.title.textColor = UIColor(named: "customTextColor")
                 cell.detailLabel.text =  "(0/\(category.items.count))"
                 cell.detailLabel.font = .systemFont(ofSize: 14)
                 cell.detailLabel.textColor = .none

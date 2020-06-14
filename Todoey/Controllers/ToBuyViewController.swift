@@ -31,6 +31,7 @@ class ToBuyViewController: UIViewController {
         super.viewDidLoad()
         loadItems()
         
+        
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor(red: 80/255, green: 156/255, blue: 99/255, alpha: 1.0)
@@ -121,7 +122,7 @@ extension ToBuyViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryType = item.done ? .checkmark : .none
             cell.accessoryType = item.done == true ? .checkmark : .none
             cell.textLabel?.font = item.done ? .italicSystemFont(ofSize: 16) : .systemFont(ofSize: 17, weight: .medium)
-            cell.textLabel?.textColor = item.done ? .systemGray : .none
+            cell.textLabel?.textColor = item.done ? .systemGray : UIColor(named: "customTextColor")
             
         } else {
             cell.textLabel?.text = "No item added"

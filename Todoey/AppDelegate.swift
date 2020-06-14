@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        UITabBar.appearance().tintColor = .systemRed
+//        UITabBar.appearance().backgroundColor = .black
+//        UITabBar.appearance().barTintColor = .darkGray
+        
         print(Realm.Configuration.defaultConfiguration.fileURL)
 
 //        do {

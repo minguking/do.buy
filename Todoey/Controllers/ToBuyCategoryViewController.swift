@@ -162,19 +162,20 @@ extension ToBuyCategoryViewController: UITableViewDataSource, UITableViewDelegat
                 }
                 
                 cell.title.text = category.name
+                cell.title.textColor = UIColor(named: "customTextColor")
                 cell.detailLabel.text = "(\(i)/\(category.item.count))"
                 cell.detailLabel?.font = .systemFont(ofSize: 14)
                 cell.backgroundColor = .clear
                 
                 if i == 0 {
                     cell.title.font = .italicSystemFont(ofSize: 18)
-                    cell.title.textColor = .systemPurple
+                    cell.title.textColor = .purple
                     cell.detailLabel.textColor = .systemPink
                     cell.backgroundColor = UIColor(red: 50/255, green: 200/255, blue: 200/255, alpha: 0.7)
                     
                 } else {
                     cell.title.font = .systemFont(ofSize: 19, weight: .medium)
-                    cell.title.textColor = .none
+                    cell.title.textColor = UIColor(named: "customTextColor")
                     cell.detailLabel.textColor = .none
                     cell.backgroundColor = .clear
                 }
@@ -183,10 +184,10 @@ extension ToBuyCategoryViewController: UITableViewDataSource, UITableViewDelegat
                 
                 cell.title.text = category.name
                 cell.title.font = .systemFont(ofSize: 19, weight: .medium)
+                cell.title.textColor = UIColor(named: "customTextColor")
                 cell.detailLabel.text = "(0/\(category.item.count))"
                 cell.detailLabel.font = .systemFont(ofSize: 14)
                 cell.backgroundColor = .clear
-                cell.title.textColor = .none
                 cell.detailLabel.textColor = .none
             }
         }

@@ -129,7 +129,7 @@ extension ToDoViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = item.title
             cell.accessoryType = item.done ? .checkmark : .none
             cell.textLabel?.font = item.done ? .italicSystemFont(ofSize: 16) : .systemFont(ofSize: 17, weight: .medium)
-            cell.textLabel?.textColor = item.done ? .systemGray : .none
+            cell.textLabel?.textColor = item.done ? .systemGray : UIColor(named: "customTextColor")
             
         } else {
             cell.textLabel?.text = "No items added"
