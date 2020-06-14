@@ -112,7 +112,7 @@
 		EB2BE4ED239524DB00FB933B = {
 			isa = PBXGroup;
 			children = (
-				EB2BE4F8239524DB00FB933B /* Todoey */,
+				EB2BE4F8239524DB00FB933B /* do.buy */,
 				EB2BE4F7239524DB00FB933B /* Products */,
 				AC53059DB09C48A17FE8C35B /* Pods */,
 				AE7AC9C706D1A8144635A66D /* Frameworks */,
@@ -127,7 +127,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EB2BE4F8239524DB00FB933B /* Todoey */ = {
+		EB2BE4F8239524DB00FB933B /* do.buy */ = {
 			isa = PBXGroup;
 			children = (
 				EB2BE4F9239524DB00FB933B /* AppDelegate.swift */,
@@ -139,15 +139,15 @@
 				EB2BE504239524DC00FB933B /* LaunchScreen.storyboard */,
 				EB2BE507239524DC00FB933B /* Info.plist */,
 			);
-			path = Todoey;
+			path = do.buy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EB2BE4F5239524DB00FB933B /* Todoey */ = {
+		EB2BE4F5239524DB00FB933B /* do.buy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EB2BE50A239524DC00FB933B /* Build configuration list for PBXNativeTarget "Todoey" */;
+			buildConfigurationList = EB2BE50A239524DC00FB933B /* Build configuration list for PBXNativeTarget "do.buy" */;
 			buildPhases = (
 				9D9F188C24D7BD588F49CD33 /* [CP] Check Pods Manifest.lock */,
 				EB2BE4F2239524DB00FB933B /* Sources */,
@@ -159,7 +159,7 @@
 			);
 			dependencies = (
 			);
-			name = Todoey;
+			name = do.buy;
 			productName = Todoey;
 			productReference = EB2BE4F6239524DB00FB933B /* do.buy.app */;
 			productType = "com.apple.product-type.application";
@@ -192,7 +192,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EB2BE4F5239524DB00FB933B /* Todoey */,
+				EB2BE4F5239524DB00FB933B /* do.buy */,
 			);
 		};
 /* End PBXProject section */
@@ -464,7 +464,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EB2BE50A239524DC00FB933B /* Build configuration list for PBXNativeTarget "Todoey" */ = {
+		EB2BE50A239524DC00FB933B /* Build configuration list for PBXNativeTarget "do.buy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EB2BE50B239524DC00FB933B /* Debug */,
